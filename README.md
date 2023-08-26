@@ -4,7 +4,7 @@ It was made by jasonlaubb and get support from hutaotangzhu#0
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: Chinese
-- support version: 1.20.10
+- support version: bedrock 1.20.10 or above
 - requirement: Beta-API & Holiday creator feature
 > note: mute function need to enable minecraft education version
 # Detect modules
