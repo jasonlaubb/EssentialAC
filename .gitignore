@@ -1,8 +1,14 @@
 # Compiled class file
 *.class
 
-# Log file
+# Useless file
 *.log
+*.txt
+*.exe
+*.bat
+*.jpg
+*.jpeg
+*.gif
 
 # BlueJ files
 *.ctxt
