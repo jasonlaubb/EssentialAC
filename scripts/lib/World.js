@@ -11,7 +11,7 @@ export function flag(player, detect, punishment) {
 };
 
 export function killDroppedItem(x, y, z, dimension = "overworld") {
-  world.getDimension(dimension).runCommand(`kill @e[type=item,r=1.5,x=${x},y=${y},z=${z}]`);
+  mc.world.getDimension(dimension).runCommand(`kill @e[type=item,r=1.5,x=${x},y=${y},z=${z}]`);
 };
 
 export function warn(detect, info) {
