@@ -1,0 +1,36 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "§9§lEssential Anti Cheat V1.0.0-beta",
+    "description": "§fA basic anti cheat to against hacker\nMade by jasonlaubb and BlueBoot6336421\n§eOpen BetaAPI & hoilday creator",
+    "uuid": "bab73510-ac8e-4aa2-b228-326b6ad8bf7e",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 0]
+  },
+  "modules": [
+    {
+      "description": "data modules",
+      "type": "data",
+      "uuid": "7143fc29-e6a3-4a41-8717-438d92110c87",
+      "version": [1, 0, 0]
+    },
+    {
+      "description": "scripts modules",
+      "language": "javascript",
+      "type": "script",
+      "uuid": "6bccbb07-2caa-4dda-8d6e-02e69f070e5a",
+      "version": [1, 0, 0],
+      "entry": "scripts/core.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.4.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "1.2.0-beta"
+    }
+  ]
+}

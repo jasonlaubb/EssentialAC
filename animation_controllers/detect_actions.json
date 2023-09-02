@@ -1,0 +1,268 @@
+{
+    "format_version": "1.10.0",
+    "animation_controllers": {
+        "controller.animation.jump": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "jump": "query.is_jumping"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:jump"
+                    ]
+                },
+                "jump": {
+                    "transitions": [{
+                        "default": "!query.is_jumping"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:jump"
+                    ]
+                }
+            }
+        },
+        "controller.animation.glide": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "glide": "query.is_gliding"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:gliding"
+                    ]
+                },
+                "glide": {
+                    "transitions": [{
+                        "default": "!query.is_gliding"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:gliding"
+                    ]
+                }
+            }
+        },
+        "controller.animation.levitate": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "levitate": "query.is_levitating"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:levitating"
+                    ]
+                },
+                "levitate": {
+                    "transitions": [{
+                        "default": "!query.is_levitating"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:levitating"
+                    ]
+                }
+            }
+        },
+        "controller.animation.ground": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "ground": "query.is_on_ground"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:ground"
+                    ]
+                },
+                "ground": {
+                    "transitions": [{
+                        "default": "!query.is_on_ground"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:ground"
+                    ]
+                }
+            }
+        },
+        "controller.animation.death": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "dead": "!query.is_alive"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:dead"
+                    ]
+                },
+                "dead": {
+                    "transitions": [{
+                        "default": "query.is_alive"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:dead",
+                        "/tag @s remove ess:right"
+                    ]
+                }
+            }
+        },
+        "controller.animation.ride": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "ride": "query.is_riding"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:riding",
+                        "/tag @s remove ess:moving"
+                    ]
+                },
+                "ride": {
+                    "transitions": [{
+                        "default": "!query.is_riding"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:riding"
+                    ]
+                }
+            }
+        },
+        "controller.animation.left": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "left": "variable.attack_time"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:left"
+                    ]
+                },
+                "left": {
+                    "transitions": [{
+                        "default": "!variable.attack_time"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:left"
+                    ]
+                }
+            }
+        },
+        "controller.animation.right": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "right": "query.is_using_item && query.get_equipped_item_name != 'fishing_rod'"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:right"
+                    ]
+                },
+                "right": {
+                    "transitions": [{
+                        "default": "!query.is_using_item"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:right"
+                    ]
+                }
+            }
+        },
+        "controller.animation.sneak": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "sneak": "query.is_sneaking"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:sneak"
+                    ]
+                },
+                "sneak": {
+                    "transitions": [{
+                        "default": "!query.is_sneaking"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:sneak"
+                    ]
+                }
+            }
+        },
+        "controller.animation.move": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "move": "query.is_moving"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:moving"
+                    ]
+                },
+                "move": {
+                    "transitions": [{
+                        "default": "!query.is_moving"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:moving"
+                    ]
+                }
+            }
+        },
+        "controller.animation.swim": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "swim": "query.is_swimming"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:swimming"
+                    ]
+                },
+                "swim": {
+                    "transitions": [{
+                        "default": "!query.is_swimming"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:swimming"
+                    ]
+                }
+            }
+        },
+        "controller.animation.sleep": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "sleeping": "query.is_sleeping"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:sleeping"
+                    ]
+                },
+                "sleeping": {
+                    "transitions": [{
+                        "default": "!query.is_sleeping"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:sleeping"
+                    ]
+                }
+            }
+        },
+        "controller.animation.trident": {
+            "states": {
+                "default": {
+                    "transitions": [{
+                        "trident": "query.get_equipped_item_name == 'trident'"
+                    }],
+                    "on_entry": [
+                        "/tag @s add ess:trident",
+                        "/scoreboard players set @s last_attack 0"
+                    ]
+                },
+                "trident": {
+                    "transitions": [{
+                        "default": "query.get_equipped_item_name != 'trident'"
+                    }],
+                    "on_entry": [
+                        "/tag @s remove ess:trident"
+                    ]
+                }
+            }
+        }
+    }
+}
