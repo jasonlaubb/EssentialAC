@@ -1,0 +1,88 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.autototem": {
+			"states": {
+				"autototem": {
+					"transitions": [{
+						"totem": "query.get_equipped_item_name('off_hand') == 'totem_of_undying'"
+					}]
+				},
+				"totem": {
+					"on_entry": [
+						"/tag @s[tag=ess:guiopen] add essflag:movingtotemA",
+						"/tag @s[tag=ess:moving] add essflag:movingtotemB",
+						"/tag @s[tag=ess:attack] add essflag:movingtotemC"
+					],
+					"transitions": [{
+						"autototem": "query.get_equipped_item_name('off_hand') != 'totem_of_undying'"
+					}]
+				}
+			}
+		},
+		"controller.animation.autoshield": {
+			"states": {
+				"autoshield": {
+					"transitions": [{
+						"shield": "query.get_equipped_item_name('off_hand') == 'shield'"
+					}]
+				},
+				"shield": {
+					"on_entry": [
+						"/tag @s[tag=ess:guiopen] add essflag:movingsheidA",
+						"/tag @s[tag=ess:moving] add essflag:movingsheidB",
+						"/tag @s[tag=ess:attack] add essflag:movingsheidC"
+					],
+					"transitions": [{
+						"autoshield": "query.get_equipped_item_name('off_hand') != 'shield'"
+					}]
+				}
+			}
+		},
+		"controller.animation.invmove": {
+			"states": {
+				"default": {
+					"transitions": [{
+						"invmove": "query.variant == 1"
+					}],
+					"on_entry": [
+						"/tag @s add ess:guiopen",
+						"/tag @s[tag=ess:moving] add essflag:invmoveA",
+						"/tag @s[tag=ess:attack] add essflag:invmoveB",
+						"/tag @s[tag=ess:right] add essflag:invmoveC"
+					]
+				},
+				"invmove": {
+					"transitions": [{
+						"default": "query.variant != 1"
+					}],
+					"on_entry": [
+						"/tag @s remove ess:guiopen"
+					]
+				}
+			}
+		},
+		"controller.animation.noswing": {
+			"states": {
+				"default": {
+					"transitions": [{
+						"noswing": "query.skin_id == 1"
+					}],
+					"on_entry": [
+						"/tag @s add ess:attack",
+						"@s ess:reset_skinid"
+					]
+				},
+				"noswing": {
+					"transitions": [{
+						"default": "query.skin_id != 1"
+					}],
+					"on_entry": [
+						"/tag @s remove ess:attack",
+						"@s ess:reset_skinid"
+					]
+				}
+			}
+		}
+	}
+}
