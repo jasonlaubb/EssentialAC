@@ -1,12 +1,13 @@
 import * as mc from "@minecraft/server"
+import { langs } from "./Language";
 
 export function flag(player, detect, punishment) {
-  if (mc.world.database_config.notify) mc.world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${lang.cheating} | ${lang.detectevent}: §c${detect}`);
+  if (mc.world.database_config.notify) mc.world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${langs().cheating} | ${langs().detectevent}: §c${detect}`);
   if (punishment == "tempkick") {
     player.tempkickstate = true;
     player.triggerEvent("tempkick")
   };
-  if (punishment == "kick") return player.runCommand(`kick "${player.name}" "§9\nEssential §l§7>§r§c\n§g${lang.cheating} | ${lang.detectevent}: §c${detect}"`);
+  if (punishment == "kick") return player.runCommand(`kick "${player.name}" "§9\nEssential §l§7>§r§c\n§g${langs().cheating} | ${langs().detectevent}: §c${detect}"`);
   if (punishment == "ban") return player.addTag(`isBanned`)
 };
 
@@ -17,9 +18,9 @@ export function killDroppedItem(x, y, z, dimension = "overworld") {
 export function warn(detect, info) {
   if (!mc.world.database_config.notify) return;
   if (info == null) {
-    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${lang.warning} | ${lang.detectevent}: §c${detect}`)
+    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${langs().warning} | ${langs().detectevent}: §c${detect}`)
   } else {
-    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${info} | ${lang.detectevent}: §c${detect}`)
+    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${info} | ${langs().detectevent}: §c${detect}`)
   }
 };
 
