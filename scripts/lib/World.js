@@ -1,7 +1,7 @@
 import * as mc from "@minecraft/server"
 
 export function flag(player, detect, punishment) {
-  if (mc.world.database_config.notify) world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${lang.cheating} | ${lang.detectevent}: §c${detect}`);
+  if (mc.world.database_config.notify) mc.world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${lang.cheating} | ${lang.detectevent}: §c${detect}`);
   if (punishment == "tempkick") {
     player.tempkickstate = true;
     player.triggerEvent("tempkick")
@@ -17,14 +17,14 @@ export function killDroppedItem(x, y, z, dimension = "overworld") {
 export function warn(detect, info) {
   if (!mc.world.database_config.notify) return;
   if (info == null) {
-    return world.sendMessage(`§9Essential §l§7>§r§c\n§g${lang.warning} | ${lang.detectevent}: §c${detect}`)
+    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${lang.warning} | ${lang.detectevent}: §c${detect}`)
   } else {
-    return world.sendMessage(`§9Essential §l§7>§r§c\n§g${info} | ${lang.detectevent}: §c${detect}`)
+    return mc.world.sendMessage(`§9Essential §l§7>§r§c\n§g${info} | ${lang.detectevent}: §c${detect}`)
   }
 };
 
 export function getScores(player, scoreboard) {
-  const output = world.scoreboard.getObjective(scoreboard).getScores().find(score => score.participant.displayName == (player.typeId == "minecraft:player" ? player.name : typeof player == "string" ? player : player.id))?.score;
+  const output = mc.world.scoreboard.getObjective(scoreboard).getScores().find(score => score.participant.displayName == (player.typeId == "minecraft:player" ? player.name : typeof player == "string" ? player : player.id))?.score;
 
   if (!isNaN(Number(score1))) {
     return output
