@@ -199,7 +199,15 @@ world.afterEvents.blockPlace.subscribe(ev => {
 
   if (config.modules.placecheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const placeDis = mc.Vector.distance(player.location(x, y, z), block.location(x, y, z));
+    const placeDis = mc.Vector.distance({
+      x: player.location.x,
+      y: player.location.y,
+      z: player.location.z
+    }, {
+      x: block.location.x,
+      y: block.location.y,
+      z: block.location.z
+    });
     if (placeDis > config.modules.placecheck.reach.maxdistance) {
       player.runCommand(`setblock ${x} ${y} ${z} air`);
       return flag(player, "place_reach", config.modules.placecheck.illegalBlock.punishment)
@@ -229,7 +237,7 @@ world.afterEvents.blockBreak.subscribe(ev => {
   const { x, y, z } = ev.block.location;
   if (player.hasTag('ess:antibreak') && !player.isOp()) {
     killDroppedItem(x, y, z);
-    mc.BlockPermutation.setPermutation(block.clone());
+    block.setPermutation(block.clone());
     return player.sendMessage(`§9Essential §l§7>§r§g ${lang.antiBreak}`)
   };
   if (player.isOp() || !config.modules.breakcheck.overall) return;
@@ -241,17 +249,25 @@ world.afterEvents.blockBreak.subscribe(ev => {
       player.nuker = 0;
       player.addTag('ess:antibreak');
       killDroppedItem(x, y, z);
-      mc.BlockPermutation.setPermutation(block.clone());
+      block.setPermutation(block.clone());
       flag(player, "nuker", config.modules.breakcheck.nuker.punishment)
     }
   };
 
   if (config.modules.breakcheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const breakDis = mc.Vector(player.location(x, y, z), block.location(x, y, z));
+    const breakDis = mc.Vector({
+      x: player.location.x,
+      y: player.location.y,
+      z: player.location.z
+    }, {
+      x: block.location.x,
+      y: block.location.y,
+      z: block.location.z
+    });
     if (breakDis > config.modules.breakcheck.reach.maxdistance) {
       killDroppedItem(x, y, z);
-      mc.BlockPermutation.setPermutation(block.clone());
+      block.setPermutation(block.clone());
       flag(player, "break_reach", config.modules.breakcheck.reach.punishment)
     }
   }
@@ -309,7 +325,15 @@ world.afterEvents.entityHitEntity.subscribe(ev => {
   };
   if (player.isOp() || player.typeId !== "minecraft:player" || config.modules.combatcheck.overall) return;
   if (config.modules.combatcheck.reach.state) {
-    const attckDis = mc.Vector.distance(player.location(x, y, z), target.location(x, y, z));
+    const attckDis = mc.Vector.distance({
+      x: player.location.x,
+      y: player.location.y,
+      z: player.location.z
+    }, {
+      x: target.location.x,
+      y: target.location.y,
+      z: target.location.z
+    });
     if (attackDis > config.modules.combatcheck.reach.maxdistance) {
       return flag(player, "attack_reach", config.modules.combatcheck.reach.punishment)
     }
