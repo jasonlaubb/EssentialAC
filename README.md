@@ -1,6 +1,6 @@
 # Essential Anti Cheat
 A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gameplay.
-It was made by jasonlaubb and get support from hutaotangzhu#0
+It was made by jasonlaubb and get support from hutaotangzhu#0.
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
