@@ -1,6 +1,9 @@
 # Essential Anti Cheat
 A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gameplay.
 It was made by jasonlaubb and get support from hutaotangzhu#0
+<div align="center">
+  <img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=plastic&logo=appveyor" alt="Downloads">
+</div>
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
@@ -27,11 +30,6 @@ Bad item, illegal stack, lore item, nameTag length, can destroy data, can place 
 - Admin UI: mange your server easier (Not in Beta Version)
 - DimensionLock: lock the dimensions as you want
 - WorldBorder: Lagged Back the player that out of the world border
-# Get support
-To report bug or get update news, go to our offical discord server!
-- Discord link: https://discord.gg/nZwkUC7WAV
-- Short url: https://bit.ly/MBS_DC
-- Support channel: https://discord.com/channels/1056549795025657957/1101127366966775869
 # Warning
 This Anti Cheat are using GNU Affero General Public License v3.0
 Attention not to against this license without jasonlaubb allowed

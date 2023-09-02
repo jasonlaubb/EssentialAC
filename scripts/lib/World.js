@@ -1,7 +1,7 @@
 import * as mc from "@minecraft/server"
 
 export function flag(player, detect, punishment) {
-  if (mc.world.database_confignotify) world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${lang.cheating} | ${lang.detectevent}: §c${detect}`);
+  if (mc.world.database_config.notify) world.sendMessage(`§9Essential §l§7>§r§c ${player.name} §g${lang.cheating} | ${lang.detectevent}: §c${detect}`);
   if (punishment == "tempkick") {
     player.tempkickstate = true;
     player.triggerEvent("tempkick")
@@ -15,7 +15,7 @@ export function killDroppedItem(x, y, z, dimension = "overworld") {
 };
 
 export function warn(detect, info) {
-  if (!mc.world.database_confignotify) return;
+  if (!mc.world.database_config.notify) return;
   if (info == null) {
     return world.sendMessage(`§9Essential §l§7>§r§c\n§g${lang.warning} | ${lang.detectevent}: §c${detect}`)
   } else {
