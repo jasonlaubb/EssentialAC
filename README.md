@@ -1,6 +1,9 @@
 # Essential Anti Cheat
 A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gameplay.
 It was made by jasonlaubb and get support from hutaotangzhu#0
+<div align="center">
+  <img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=for-the-badge" alt="Downloads"/>
+</div>
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
