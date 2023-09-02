@@ -27,6 +27,11 @@ Bad item, illegal stack, lore item, nameTag length, can destroy data, can place 
 - Admin UI: mange your server easier (Not in Beta Version)
 - DimensionLock: lock the dimensions as you want
 - WorldBorder: Lagged Back the player that out of the world border
+# Get support
+To report bug or get update news, go to our offical discord server!
+Discord link: https://discord.gg/nZwkUC7WAV
+Short url: https://bit.ly/MBS_DC
+Support channel: https://discord.com/channels/1056549795025657957/1101127366966775869
 # Warning
 This Anti Cheat are using GNU Affero General Public License v3.0
 Attention not to against this license without jasonlaubb allowed
