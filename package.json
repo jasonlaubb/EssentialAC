@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "api": "^6.1.1",
+    "https": "^1.0.0",
+    "hutao": "^0.0.1",
+    "js": "^0.1.0",
+    "ws": "^8.13.0"
+  },
+  "name": "essential_anti_cheat",
+  "version": "1.0.0-beta",
+  "description": "A anti cheat to against hacker in mcpe",
+  "main": "core.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeatBallGG/EssentialAC.git"
+  },
+  "keywords": [
+    "mcpe-anti-cheat",
+    "api",
+    "anticheat",
+    "bedrock-anti-cheat"
+  ],
+  "author": "jasonlaubb",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MeatBallGG/EssentialAC/issues"
+  },
+  "homepage": "https://github.com/MeatBallGG/EssentialAC#readme"
+}
