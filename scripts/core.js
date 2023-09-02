@@ -13,12 +13,12 @@ var config = get('config');
 var lang = langs(config.system.language);
 world.database_config = config;
 world.langcache = config.system.language;
-if(trueConfig.coreversion != config.coreversion || config.coreversion == undefined){
+if (trueConfig.coreversion != config.coreversion || config.coreversion == undefined) {
   console.warn(`Essential > config version not same as database`);
   config = trueConfig;
   reload('config');
 };
-if(trueConfig.uuid != config.uuid || config.uuid == undefined){
+if (trueConfig.uuid != config.uuid || config.uuid == undefined) {
   console.log(`Essential > config database changed to default`);
   config = trueConfig;
   reload('config');
@@ -211,15 +211,11 @@ world.afterEvents.blockPlace.subscribe(ev => {
 
   if (config.modules.placecheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const placeDis = new mc.Vector.distance({
-      x: player.location.x,
-      y: player.location.y,
-      z: player.location.z
-    }, {
-      x: block.location.x,
-      y: block.location.y,
-      z: block.location.z
-    });
+    const placeDis = Math.sqrt(
+      (player.location.x - block.location.x) ** 2 +
+      (player.location.y - block.location.y) ** 2 +
+      (player.location.z - block.location.z) ** 2
+    )
     if (placeDis > config.modules.placecheck.reach.maxdistance) {
       player.runCommand(`setblock ${x} ${y} ${z} air`);
       return flag(player, "place_reach", config.modules.placecheck.illegalBlock.punishment)
@@ -268,15 +264,11 @@ world.afterEvents.blockBreak.subscribe(ev => {
 
   if (config.modules.breakcheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const breakDis = new mc.Vector({
-      x: player.location.x,
-      y: player.location.y,
-      z: player.location.z
-    }, {
-      x: x,
-      y: y,
-      z: z
-    });
+    const breakDis = Math.sqrt(
+      (player.location.x - x) ** 2 +
+      (player.location.y - y) ** 2 +
+      (player.location.z - z)
+    );
     if (breakDis > config.modules.breakcheck.reach.maxdistance) {
       killDroppedItem(x, y, z);
       block.setPermutation(block.clone());
@@ -337,15 +329,11 @@ world.afterEvents.entityHitEntity.subscribe(ev => {
   };
   if (player.isOp() || player.typeId !== "minecraft:player" || config.modules.combatcheck.overall) return;
   if (config.modules.combatcheck.reach.state) {
-    const attckDis = new mc.Vector.distance({
-      x: player.location.x,
-      y: player.location.y,
-      z: player.location.z
-    }, {
-      x: target.location.x,
-      y: target.location.y,
-      z: target.location.z
-    });
+    const attckDis = Math.sqrt(
+      (player.location.x - target.location.x) ** 2 +
+      (player.location.y - target.location.y) ** 2 +
+      (player.location.z - target.location.z) ** 2
+    );
     if (attackDis > config.modules.combatcheck.reach.maxdistance) {
       return flag(player, "attack_reach", config.modules.combatcheck.reach.punishment)
     }
