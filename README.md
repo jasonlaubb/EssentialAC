@@ -3,6 +3,9 @@ A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gamep
 It was made by jasonlaubb and get support from hutaotangzhu#0
 <div align="center">
   <img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=for-the-badge" alt="Downloads"/>
+  <img src="https://img.shields.io/github/issues/MeatBallGG/EssentialAC?label=ISSUES%20OPEN&style=for-the-badge" alt="Issues Open"/>
+  <img src="https://img.shields.io/github/commit-activity/m/MeatBallGG/EssentialAC?style=for-the-badge" alt="Commits Per Week"/>
+  <img src="https://img.shields.io/github/last-commit/MeatBallGG/EssentialAC?style=for-the-badge" alt="Last Commit"/>
 </div>
 
 # Anti Cheat Info
