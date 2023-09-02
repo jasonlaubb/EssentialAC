@@ -385,12 +385,12 @@
       "kick": {
         "add": {
           "component_groups": [
-            "kick"
+            "ess:kick"
           ]
         },
         "remove": {
           "component_groups": [
-            "kick"
+            "ess:kick"
           ]
         }
       },
