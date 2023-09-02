@@ -8,10 +8,10 @@
   "name": "essential_anti_cheat",
   "version": "1.0.0-beta",
   "description": "A anti cheat to against hacker in mcpe",
-  "main": "core.js",
+  "main": "./scripts/core.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo \"Go to github download\" && exit 1"
   },
   "repository": {
     "type": "git",
