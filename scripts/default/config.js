@@ -1,5 +1,7 @@
 export default {
   "notify": true, //Some notify may not be disabled
+  "coreversion": "0",
+  "uuid":"d67a1653-f8d2-4148-81cb-01fbfc838177",
   "chatFormat": {
     "chatRank": {
       "state": true,
