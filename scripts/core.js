@@ -199,7 +199,7 @@ world.afterEvents.blockPlace.subscribe(ev => {
 
   if (config.modules.placecheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const placeDis = mc.Vector.distance({
+    const placeDis = new mc.Vector.distance({
       x: player.location.x,
       y: player.location.y,
       z: player.location.z
@@ -256,7 +256,7 @@ world.afterEvents.blockBreak.subscribe(ev => {
 
   if (config.modules.breakcheck.reach.state) {
     if (getGamemode(player) == 1) return;
-    const breakDis = mc.Vector({
+    const breakDis = new mc.Vector({
       x: player.location.x,
       y: player.location.y,
       z: player.location.z
@@ -325,7 +325,7 @@ world.afterEvents.entityHitEntity.subscribe(ev => {
   };
   if (player.isOp() || player.typeId !== "minecraft:player" || config.modules.combatcheck.overall) return;
   if (config.modules.combatcheck.reach.state) {
-    const attckDis = mc.Vector.distance({
+    const attckDis = new mc.Vector.distance({
       x: player.location.x,
       y: player.location.y,
       z: player.location.z
