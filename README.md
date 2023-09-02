@@ -1,9 +1,8 @@
 # Essential Anti Cheat
 A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gameplay.
 It was made by jasonlaubb and get support from hutaotangzhu#0
-
-<img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=plastic&logo=appveyor" alt="Downloads">
 # Anti Cheat Info
+<img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=plastic&logo=appveyor" alt="Downloads">
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
 - support version: bedrock 1.20.10 or above
