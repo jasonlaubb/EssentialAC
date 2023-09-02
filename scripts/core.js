@@ -261,9 +261,9 @@ world.afterEvents.blockBreak.subscribe(ev => {
       y: player.location.y,
       z: player.location.z
     }, {
-      x: block.location.x,
-      y: block.location.y,
-      z: block.location.z
+      x: x,
+      y: y,
+      z: z
     });
     if (breakDis > config.modules.breakcheck.reach.maxdistance) {
       killDroppedItem(x, y, z);
