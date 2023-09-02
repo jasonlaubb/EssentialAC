@@ -3,7 +3,7 @@ A advanced anti cheat for mcpe that detect hacker to cheat or destroy your gamep
 It was made by jasonlaubb and get support from hutaotangzhu#0
 <div align="center">
   <img src="https://img.shields.io/github/downloads/MeatBallGG/EssentialAC/total?style=plastic&logo=appveyor" alt="Downloads">
-</div>
+</div>;
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
