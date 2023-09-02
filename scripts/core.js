@@ -732,26 +732,26 @@ mc.system.runInterval(() => {
           if (world.database_config.modules.movement.invildsprint.state && player.isSprinting) {
             let invildsprintFlag = false;
             if (player.isSneaking) {
-              if (player.invildsprintVl > world.database_config.movement.invildsprint.lagVl) {
+              if (player.invildsprintVl > world.database_config.modules.movement.invildsprint.lagVl) {
                 player.invildsprintVl = 0;
                 lagback(player, "walking");
-                flag(player, "sprint_sneaking", world.database_config.movement.invildsprint.punishment);
+                flag(player, "sprint_sneaking", world.database_config.modules.movement.invildsprint.punishment);
                 continue
               } else invildsprintFlag = true
             };
             if (player.isGliding) {
-              if (player.invildsprintVl > world.database_config.movement.invildsprint.lagVl) {
+              if (player.invildsprintVl > world.database_config.modules.movement.invildsprint.lagVl) {
                 player.invildsprintVl = 0;
                 lagback(player, "walking");
-                flag(player, "sprint_sneaking", world.database_config.movement.invildsprint.punishment);
+                flag(player, "sprint_sneaking", world.database_config.modules.movement.invildsprint.punishment);
                 continue
               } else invildsprintFlag = true
             };
             if (player.getEffect('blindness')) {
-              if (player.invildsprintVl > world.database_config.movement.invildsprint.lagVl) {
+              if (player.invildsprintVl > world.database_config.modules.movement.invildsprint.lagVl) {
                 player.invildsprintVl = 0;
                 lagback(player, "walking");
-                flag(player, "sprint_sneaking", world.database_config.movement.invildsprint.punishment);
+                flag(player, "sprint_sneaking", world.database_config.modules.movement.invildsprint.punishment);
                 continue
               } else invildsprintFlag = true
             };
