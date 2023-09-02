@@ -24,7 +24,7 @@ Bad item, illegal stack, lore item, nameTag length, can destroy data, can place 
 - BadPacket: selfDamage, rotation, slot
 # Special modules
 - ChatRank: add the custom rank!
-- Admin UI: mange your server easier
+- Admin UI: mange your server easier (Not in Beta Version)
 - DimensionLock: lock the dimensions as you want
 - WorldBorder: Lagged Back the player that out of the world border
 # Warning
