@@ -23,12 +23,12 @@ world.langcache = config.system.language;
 if (trueConfig.coreversion != config.coreversion || config.coreversion == undefined) {
   console.warn(`Essential > config version not same as database`);
   config = trueConfig;
-  reload('config');
+  reload('config', config);
 };
 if (trueConfig.uuid != config.uuid || config.uuid == undefined) {
   console.log(`Essential > config database changed to default`);
   config = trueConfig;
-  reload('config');
+  reload('config', config);
 };
 
 if (!world.scoreboard.getObjective('gametestapi')) world.scoreboard.addObjective('gametestapi', 'debuguse');
