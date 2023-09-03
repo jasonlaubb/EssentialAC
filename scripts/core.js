@@ -14,6 +14,9 @@ var firstLoad = true;
 
 const world = mc.world;
 
+function errorlogger(e){
+  world.sendMessage(`§9Essential §l§7>§g ERROR!§r §4${e.name}: §c${e.message}`)
+};
 if (!state('config')) create('config', trueConfig);
 var config = get('config');
 var lang = langs(config.system.language);
