@@ -424,19 +424,8 @@ mc.system.runInterval(() => {
     config = get('config')
     return
   };
-  if(!config.realmUse){ //add Admin state
-    if(player.isOp()){
-      player.op = true;
-    } else {
-      player.op = false;
-    }
-  } else {
-    if(player.hasTag('ess:admin')){
-      player.Esadmin = true;
-    } else {
-      player.Esadmin = false;
-    }
-  };
+  player.op = !world.database_config.realmUse ? player.isOp() : player.hasTag('ess:admin'); //in RealmUse, use tag instead
+  player.id === '-4294967295' ? player.host = true : player.host = false //prevent host deop + tempkick
   if (!world.databasechanged && JSON.stringify(get('config')) != JSON.stringify(world.database_config)) {
     world.sendMessage(`§9Essential §l§7>§r§c ${lang.database.changed}`);
     reload('config', world.database_config);
@@ -834,7 +823,7 @@ mc.system.runInterval(() => {
 world.beforeEvents.dataDrivenEntityTriggerEvent.subscribe(ev => {
   if (ev.id !== "ess:kick") return;
   const player = ev.entity;
-  if (player.isOp()) {
+  if (player.op || player.host) {
     console.warn(`Essential > Failed to tempkick ${player.name} as Admin`);
     return ev.cancel = true
   };
