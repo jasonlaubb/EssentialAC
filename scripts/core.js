@@ -14,8 +14,8 @@ var firstLoad = true;
 
 const world = mc.world;
 
-function errorlogger(e){
-  world.sendMessage(`§9Essential §l§7>§g ERROR!§r §4${e.name}: §c${e.message}`)
+function errorlogger(e, modules){
+  world.sendMessage(`§9Essential §l§7>§g ERROR! in ${modules}§r §4${e.name}: §c${e.message}`)
 };
 
 if (!state('config')) create('config', trueConfig);
@@ -185,7 +185,7 @@ try {
     player.spamlastmessage = Date.now()
   }
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "chatSend")
 }
 });
 world.beforeEvents.itemUse.subscribe(ev => {
@@ -205,7 +205,7 @@ try {
     }
   } else player.fastuseVl = 0;
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "itemUseBeforeEvents")
 }
 });
 world.afterEvents.blockPlace.subscribe(ev => {
@@ -256,7 +256,7 @@ try {
     } else player.scaffoldVl = 0
   }
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "blockPlace")
 }
 });
 
@@ -298,7 +298,7 @@ try {
     }
   }
 } catch (e) {
-errorlogger(e)
+  errorlogger(e, "blockBreak")
 }
 });
 world.afterEvents.entitySpawn.subscribe(ev => {
@@ -318,7 +318,7 @@ try {
     warn("entity_ban", null)
   }
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "entitySpawn")
 }
 });
 
@@ -355,7 +355,7 @@ try {
     player.onJoinBreaktick = config.modules.movement.disabler.onJoin.length
   }
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "playerSpawn")
 }
 });
 world.afterEvents.entityHitEntity.subscribe(ev => {
@@ -366,7 +366,8 @@ try {
     player.kill();
     return flag(player, "invild_attack", config.modules.badpacket.attack.punishment)
   };
-  if (player.isOp() || player.typeId !== "minecraft:player" || config.modules.combatcheck.overall) return;
+  if (player.typeId !== "minecraft:player" || config.modules.combatcheck.overall) return;
+  if (player.op) return;
   if (config.modules.combatcheck.reach.state) {
     const attckDis = Math.sqrt(
       (player.location.x - target.location.x) ** 2 +
@@ -431,7 +432,7 @@ try {
     }
   };
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "entityHit")
 }
 });
 world.afterEvents.entityHurt.subscribe(ev => {
@@ -447,12 +448,10 @@ try {
     player.movementBreak = true;
     player.movementBreaktick = config.modules.movement.disabler.movement.length
   }
-} catch (e) {
-  errorlogger(e)
-}
+} catch { }
 })
 mc.system.runInterval(() => {
-  try {
+try {
   if (!state('config')) {
     world.sendMessage(`§9Essential §l§7>§g§c ${en_US.database.delete}`);
     create('config', world.database_config);
@@ -478,7 +477,7 @@ mc.system.runInterval(() => {
     console.log(`Essential > language changed`)
   };
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "systemRunInterval")
 };
 
 try {
@@ -860,7 +859,7 @@ try {
     }
   }
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "systemForEach")
 }
 }, 0);
 
@@ -879,7 +878,7 @@ try {
   player.tempkickstate = false;
   console.warn(`Essential > tempkick ${player.name} finished`)
 } catch (e) {
-  errorlogger(e)
+  errorlogger(e, "triggerEvents")
 }
 });
 
