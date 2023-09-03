@@ -514,14 +514,17 @@ mc.system.runInterval(() => {
           const atst = ats.type
           if (player.hasTag('essflag:movingsheidA') && attt.gui) {
             player.runCommand(`replaceitem entity @s slot.weapon.offhand 0 air`);
+            player.removeTag('essflag:movingsheidA');
             flag(player, "gui_totem", atst.punishment)
           };
           if (player.hasTag('essflag:movingsheidB') && attt.moving) {
             player.runCommand(`replaceitem entity @s slot.weapon.offhand 0 air`);
+            player.removeTag('essflag:movingsheidB');
             flag(player, "gui_totem", atst.punishment)
           };
           if (player.hasTag('essflag:movingsheidC') && attt.attack) {
             player.runCommand(`replaceitem entity @s slot.weapon.offhand 0 air`);
+            player.removeTag('essflag:movingsheidC');
             flag(player, "gui_totem", atst.punishment)
           }
         }
