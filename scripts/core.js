@@ -880,8 +880,12 @@ try {
 });
 
 mc.system.beforeEvents.watchdogTerminate.subscribe(ev => {
+try {
   ev.cancel = true;
   console.warn(`Essential > watchdogTerminate | ${terminateReason}`)
+} catch (e) {
+  errorlogger(e, "watchDogEvent")
+}
 });
 
 loadms = Date.now() - loadms
