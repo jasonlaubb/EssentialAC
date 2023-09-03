@@ -261,7 +261,7 @@ world.afterEvents.blockBreak.subscribe(ev => {
 try {
   const player = ev.player;
   const block = ev.brokenBlockPermutation;
-  const { x, y, z } = ev.block.location;
+  const { x, y, z } = block.location;
   if (player.hasTag('ess:antibreak') && !player.op) {
     killDroppedItem(x, y, z);
     block.setPermutation(block.clone());
