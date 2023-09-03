@@ -10,6 +10,7 @@ import ch_TW from './lang/ch_TW.js';
 import JPN from './lang/JPN.js';
 
 import { flag, killDroppedItem, getScores, getGamemode, lagback, compare } from "./lib/World.js"; //World modules
+var firstLoad = true;
 
 const world = mc.world;
 
@@ -72,7 +73,7 @@ world.beforeEvents.chatSend.subscribe(ev => {
   const player = ev.sender
   const message = ev.message
   let trueMessage
-  if (config.modules.chatcheck.overall && !player.isOp()) {
+  if (config.modules.chatcheck.overall && !player.op) {
     if (config.modules.chatcheck.sendspeed.state) {
       const chatdelay = Date.now() - player.lastmessagesend
       if (chatdelay < config.modules.chatcheck.sendspeed.minMessageDelay) {
@@ -134,7 +135,7 @@ world.beforeEvents.chatSend.subscribe(ev => {
     world.sendMessage(`${bkl[0]}${ranking}${bkl[1]} ${nc}${player.name}${cl}${cnc}${message}`)
     ev.cancel = true;
   };
-  if (!config.modules.spamcheck.overall || player.isOp()) return;
+  if (!config.modules.spamcheck.overall || player.op) return;
   if (player.hasTag('ess:moving') && world.database_config.modules.spamcheck.moving.state) {
     if (player.spamAvl <= world.database_config.modules.spamcheck.moving.warnVl) {
       player.spamAvl++
@@ -181,7 +182,7 @@ world.beforeEvents.chatSend.subscribe(ev => {
 });
 world.beforeEvents.itemUse.subscribe(ev => {
   const player = ev.source;
-  if (player.isOp() || config.modules.actioncheck.overall) return;
+  if (player.op || config.modules.actioncheck.overall) return;
   const itemCD = ev.itemStack.getComponent(cooldownTicks);
   if (player.lastItemUse == undefined) return player.lastItemUse = Date.now();
   if (Date.now() - player.lastItemUse < itemCD + config.modules.actioncheck.fastuse.addCooldown) {
@@ -197,7 +198,7 @@ world.beforeEvents.itemUse.subscribe(ev => {
 });
 world.afterEvents.blockPlace.subscribe(ev => {
   const player = ev.player;
-  if (player.isOp() || !config.modules.placecheck.overall) return;
+  if (player.op || !config.modules.placecheck.overall) return;
   const block = ev.block;
   const { x, y, z } = block.location;
 
@@ -247,12 +248,12 @@ world.afterEvents.blockBreak.subscribe(ev => {
   const player = ev.player;
   const block = ev.brokenBlockPermutation;
   const { x, y, z } = ev.block.location;
-  if (player.hasTag('ess:antibreak') && !player.isOp()) {
+  if (player.hasTag('ess:antibreak') && !player.op) {
     killDroppedItem(x, y, z);
     block.setPermutation(block.clone());
     return player.sendMessage(`§9Essential §l§7>§r§g ${lang.antiBreak}`)
   };
-  if (player.isOp() || !config.modules.breakcheck.overall) return;
+  if (player.op || !config.modules.breakcheck.overall) return;
 
   if (config.modules.breakcheck.nuker.state) {
     if (player.isOp() || !config.modules.breakcheck.overall) return;
@@ -298,8 +299,13 @@ world.afterEvents.entitySpawn.subscribe(ev => {
 });
 
 world.afterEvents.playerSpawn.subscribe(ev => {
-  if (!ev.initialSpawn || ev.player.isOp()) return;
-  ev.player.sendMessage(`§9Essential §l§7>§g§c ${lang.running}`);
+  if (firstLoad && config.debug){
+    ev.player.runCommand(`function debug/BetaAPI`);
+    ev.player.runCommand(`function debug/HoildayCreator`);
+    firstLoad = false
+  };
+  if (!ev.initialSpawn || ev.player.op) return;
+  ev.player.sendMessage(`§9Essential §l§7>§r§g ${lang.running}`);
   const player = ev.player;
   if (config.modules.joincheck.namespoof.is_valid.state) {
     const playername = player.name
@@ -327,7 +333,7 @@ world.afterEvents.playerSpawn.subscribe(ev => {
 world.afterEvents.entityHitEntity.subscribe(ev => {
   const player = ev.damagingEntity;
   const target = ev.hitEntity;
-  if (config.modules.badpacket.overall && !player.isOp() && player.id == target.id && config.modules.badpacket.attack.state) {
+  if (config.modules.badpacket.overall && !player.op && player.id == target.id && config.modules.badpacket.attack.state) {
     player.kill();
     return flag(player, "invild_attack", config.modules.badpacket.attack.punishment)
   };
@@ -399,7 +405,7 @@ world.afterEvents.entityHitEntity.subscribe(ev => {
 world.afterEvents.entityHurt.subscribe(ev => {
   if (!config.modules.movement.overall) return;
   const player = [...mc.world.getPlayers()].filter(player => ev.damageSource.damagingEntity?.id == player.id)[0];
-  if (!player?.isOp() || player.typeId !== "minecraft:player" || getGamemode(player) == 1 || getGamemode(player) == 3) return;
+  if (!player.op || player.typeId !== "minecraft:player" || getGamemode(player) == 1 || getGamemode(player) == 3) return;
   const ds = ev.damageSource.cause;
   if (config.modules.movement.disabler.fly.state && config.modules.movement.disabler.fly.hurtType.includes(ds)) {
     player.antiflyBreak = true
@@ -449,11 +455,11 @@ mc.system.runInterval(() => {
   };
 
   for (const player of mc.world.getPlayers()) {
-    if (world.database_config.modules.permissioncheck.forceop.state && player.isOp() && !world.database_config.modules.permissioncheck.adminList.includes(player.name)) {
+    if (world.database_config.modules.permissioncheck.forceop.state && player.op && !world.database_config.modules.permissioncheck.adminList.includes(player.name)) {
       player.setOp(false);
       flag(player, world.database_config.modules.permissioncheck, forceop.punishment)
     };
-    if (world.database_config.modules.permissioncheck.AntiDeop.state && !player.isOp()) {
+    if (world.database_config.modules.permissioncheck.AntiDeop.state && !player.op) {
       if (world.database_config.modules.permissioncheck.AntiDeop.writelist.state) {
         if (world.database_config.modules.permissioncheck.AntiDeop.writelist.writelist.includes(player.name) && world.database_config.modules.permissioncheck.adminList.includes(player.name)) {
           player.setOp(true)
@@ -464,7 +470,7 @@ mc.system.runInterval(() => {
         }
       }
     };
-    if (!player.isOp()) {
+    if (!player.op) {
       const { x, y, z } = player.location
 
       if (world.database_config.system.lagback.state) {
