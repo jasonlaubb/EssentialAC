@@ -1,7 +1,7 @@
 export default {
   "notify": true, //Some notify may not be disabled
   "coreversion": "1",
-  "uuid":"d67a1653-f8d2-4148-81cb-01fbfc838177",
+  "uuid":"d67a1653-f8d2-4148-81cb-01fbfc838178",
   "chatFormat": {
     "chatRank": {
       "state": true,
@@ -66,7 +66,7 @@ export default {
       },
       "reach": {
         "state": true,
-        "maxdistance": 4.5,
+        "maxdistance": 5.1,
         "punishment": "tempkick"
       },
       "scaffold": {
@@ -87,7 +87,7 @@ export default {
       },
       "reach": {
         "state": true,
-        "maxdistance": 4.5,
+        "maxdistance": 5.1,
         "punishment": "tempkick"
       }
     },
@@ -175,7 +175,7 @@ export default {
       },
       "speed": {
         "state": true,
-        "maxspeed": 0.35,
+        "maxspeed": 0.45,
         "lagVl": 3,
         "punishment": "none"
       },
