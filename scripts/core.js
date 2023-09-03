@@ -1,10 +1,15 @@
-import * as mc from '@minecraft/server';
-import * as ui from '@minecraft/server-ui'
-import trueConfig from './default/config.js';
-import { create, state, reload, get } from './lib/DataBase.js';
-import { langs } from './lib/Language.js';
-import en_US from './lang/en_US.js';
-import { flag, killDroppedItem, getScores, getGamemode, lagback, compare } from "./lib/World.js"
+let loadms = Date.now(); //to check for /reload speed
+import * as mc from '@minecraft/server'; //import minecraft modules
+import * as ui from '@minecraft/server-ui' //import ui
+import trueConfig from './default/config.js'; //get the Default config
+import { create, state, reload, get } from './lib/DataBase.js'; //DataBase modules
+import { langs } from './lib/Language.js'; //language system modules
+
+import en_US from './lang/en_US.js'; //lang files
+import ch_TW from './lang/ch_TW.js';
+import JPN from './lang/JPN.js';
+
+import { flag, killDroppedItem, getScores, getGamemode, lagback, compare } from "./lib/World.js"; //World modules
 
 const world = mc.world;
 
@@ -23,8 +28,6 @@ if (trueConfig.uuid != config.uuid || config.uuid == undefined) {
   config = trueConfig;
   reload('config');
 };
-
-
 
 if (!world.scoreboard.getObjective('gametestapi')) world.scoreboard.addObjective('gametestapi', 'debuguse');
 
@@ -73,7 +76,8 @@ world.beforeEvents.chatSend.subscribe(ev => {
     if (config.modules.chatcheck.sendspeed.state) {
       const chatdelay = Date.now() - player.lastmessagesend
       if (chatdelay < config.modules.chatcheck.sendspeed.minMessageDelay) {
-        const second = chatdelay / 1000;
+        const cansend = chatdelay + config.modules.chatcheck.sendspeed.minMessageDelay
+        const second = config.modules.chatcheck.sendspeed.minMessageDelay - chatdelay / 1000;
         player.sendMessage(`§9Essential §l§7>§r§c ${lang.chatFormat.tooFast[0]}${second.toFixed(2)}${lang.chatFormat.tooFast[1]}`);
         return ev.cancel = true
       }
@@ -114,7 +118,7 @@ world.beforeEvents.chatSend.subscribe(ev => {
     };
     let ranking = []
     if (ranks.length > 0) {
-      const bkl = config.chatFormat.chatRank.dividingLine.split("/")
+      const bkl = config.chatFormat.chatRank.banklet
 
       for (const rank of ranks) {
         ranking.push(`${bkl[0]}[${rank}]${bkl[1]}`)
@@ -122,12 +126,12 @@ world.beforeEvents.chatSend.subscribe(ev => {
     } else {
       ranking.push(config.chatFormat.chatRank.default)
     }
-    ranking = ranking.join("/")
-    const bkl = config.chatFormat.chatRank.dividingLine.split("/")
+    ranking = ranking.join(config.chatFormat.chatRank.dividingLine)
+    const bkl = config.chatFormat.chatRank.banklet
     const cnc = config.chatFormat.chatRank.textcolor
     const cl = config.chatFormat.chatRank.chatline
     const nc = config.chatFormat.chatRank.namecolor
-    world.sendMessage(`${bkl[0]}${ranking}${bkl[1]}${nc}${player.name}${cl}${cnc}${message}`)
+    world.sendMessage(`${bkl[0]}${ranking}${bkl[1]} ${nc}${player.name}${cl}${cnc}${message}`)
     ev.cancel = true;
   };
   if (!config.modules.spamcheck.overall || player.isOp()) return;
@@ -406,7 +410,6 @@ world.afterEvents.entityHurt.subscribe(ev => {
   }
 })
 mc.system.runInterval(() => {
-  //Anti database change
   if (!state('config')) {
     world.sendMessage(`§9Essential §l§7>§g§c ${en_US.database.delete}`);
     create('config', world.database_config);
@@ -415,8 +418,21 @@ mc.system.runInterval(() => {
     config = get('config')
     return
   };
+  if(!config.realmUse){ //add Admin state
+    if(player.isOp()){
+      player.op = true;
+    } else {
+      player.op = false;
+    }
+  } else {
+    if(player.hasTag('ess:admin')){
+      player.Esadmin = true;
+    } else {
+      player.Esadmin = false;
+    }
+  };
   if (!world.databasechanged && JSON.stringify(get('config')) != JSON.stringify(world.database_config)) {
-    world.sendMessage(`§9Essential §l§7>§g§c ${lang.database.changed}`);
+    world.sendMessage(`§9Essential §l§7>§r§c ${lang.database.changed}`);
     reload('config', world.database_config);
     return
   };
@@ -826,5 +842,6 @@ mc.system.beforeEvents.watchdogTerminate.subscribe(ev => {
   console.warn(`Essential > watchdogTerminate | ${terminateReason}`)
 });
 
+loadms = Date.now() - loadms
 console.log('Essential > scripts loaded');
-world.sendMessage(`§9Essential §l§7>§g§c ${lang.striptsloaded}`)
+world.sendMessage(`§9Essential §l§7>§r§g ${lang.striptsloaded} §e(${loadms}ms)`)
