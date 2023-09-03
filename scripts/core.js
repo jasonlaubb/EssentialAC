@@ -17,6 +17,7 @@ const world = mc.world;
 function errorlogger(e){
   world.sendMessage(`§9Essential §l§7>§g ERROR!§r §4${e.name}: §c${e.message}`)
 };
+
 if (!state('config')) create('config', trueConfig);
 var config = get('config');
 var lang = langs(config.system.language);
@@ -73,6 +74,7 @@ for (const player of mc.world.getPlayers()) {
 };
 
 world.beforeEvents.chatSend.subscribe(ev => {
+try {
   const player = ev.sender
   const message = ev.message
   let trueMessage
@@ -182,8 +184,12 @@ world.beforeEvents.chatSend.subscribe(ev => {
     };
     player.spamlastmessage = Date.now()
   }
+} catch (e) {
+  errorlogger(e)
+}
 });
 world.beforeEvents.itemUse.subscribe(ev => {
+try {
   const player = ev.source;
   if (player.op || config.modules.actioncheck.overall) return;
   const itemCD = ev.itemStack.getComponent(cooldownTicks);
@@ -198,8 +204,12 @@ world.beforeEvents.itemUse.subscribe(ev => {
       flag(player, "fastuse", config.modules.actioncheck.fastsue.punishment)
     }
   } else player.fastuseVl = 0;
+} catch (e) {
+  errorlogger(e)
+}
 });
 world.afterEvents.blockPlace.subscribe(ev => {
+try {
   const player = ev.player;
   if (player.op || !config.modules.placecheck.overall) return;
   const block = ev.block;
@@ -245,9 +255,13 @@ world.afterEvents.blockPlace.subscribe(ev => {
       }
     } else player.scaffoldVl = 0
   }
+} catch (e) {
+  errorlogger(e)
+}
 });
 
 world.afterEvents.blockBreak.subscribe(ev => {
+try {
   const player = ev.player;
   const block = ev.brokenBlockPermutation;
   const { x, y, z } = ev.block.location;
@@ -283,8 +297,12 @@ world.afterEvents.blockBreak.subscribe(ev => {
       flag(player, "break_reach", config.modules.breakcheck.reach.punishment)
     }
   }
+} catch (e) {
+errorlogger(e)
+}
 });
 world.afterEvents.entitySpawn.subscribe(ev => {
+try {
   const entity = ev.entity;
   const entityId = entity.typeId;
   if (config.modules.commandblockexploit.commandblockminecart && entityId == "minecraft:command_block_minecart") {
@@ -299,9 +317,13 @@ world.afterEvents.entitySpawn.subscribe(ev => {
     entity.kill();
     warn("entity_ban", null)
   }
+} catch (e) {
+  errorlogger(e)
+}
 });
 
 world.afterEvents.playerSpawn.subscribe(ev => {
+try {
   if (firstLoad && config.debug){
     ev.player.runCommand(`function debug/BetaAPI`);
     ev.player.runCommand(`function debug/HoildayCreator`);
@@ -332,8 +354,12 @@ world.afterEvents.playerSpawn.subscribe(ev => {
     player.onJoinBreak = true;
     player.onJoinBreaktick = config.modules.movement.disabler.onJoin.length
   }
+} catch (e) {
+  errorlogger(e)
+}
 });
 world.afterEvents.entityHitEntity.subscribe(ev => {
+try {
   const player = ev.damagingEntity;
   const target = ev.hitEntity;
   if (config.modules.badpacket.overall && !player.op && player.id == target.id && config.modules.badpacket.attack.state) {
@@ -404,8 +430,12 @@ world.afterEvents.entityHitEntity.subscribe(ev => {
       flag(player, "killaura_gui", config.modules.combatcheck.killauraGui.punishment)
     }
   };
+} catch (e) {
+  errorlogger(e)
+}
 });
 world.afterEvents.entityHurt.subscribe(ev => {
+try {
   if (!config.modules.movement.overall) return;
   const player = [...mc.world.getPlayers()].filter(player => ev.damageSource.damagingEntity?.id == player.id)[0];
   if (!player.op || player.typeId !== "minecraft:player" || getGamemode(player) == 1 || getGamemode(player) == 3) return;
@@ -417,8 +447,12 @@ world.afterEvents.entityHurt.subscribe(ev => {
     player.movementBreak = true;
     player.movementBreaktick = config.modules.movement.disabler.movement.length
   }
+} catch (e) {
+  errorlogger(e)
+}
 })
 mc.system.runInterval(() => {
+  try {
   if (!state('config')) {
     world.sendMessage(`§9Essential §l§7>§g§c ${en_US.database.delete}`);
     create('config', world.database_config);
@@ -443,7 +477,11 @@ mc.system.runInterval(() => {
     lang = langs(world.database_config.system.language)
     console.log(`Essential > language changed`)
   };
+} catch (e) {
+  errorlogger(e)
+};
 
+try {
   for (const player of mc.world.getPlayers()) {
     player.op = !world.database_config.realmUse ? player.isOp() : player.hasTag('ess:admin'); //in RealmUse, use tag instead
     player.id === '-4294967295' ? player.host = true : player.host = false //prevent host deop + tempkick
@@ -821,9 +859,13 @@ mc.system.runInterval(() => {
       }
     }
   }
+} catch (e) {
+  errorlogger(e)
+}
 }, 0);
 
 world.beforeEvents.dataDrivenEntityTriggerEvent.subscribe(ev => {
+try {
   if (ev.id !== "ess:kick") return;
   const player = ev.entity;
   if (player.op || player.host) {
@@ -836,6 +878,9 @@ world.beforeEvents.dataDrivenEntityTriggerEvent.subscribe(ev => {
   };
   player.tempkickstate = false;
   console.warn(`Essential > tempkick ${player.name} finished`)
+} catch (e) {
+  errorlogger(e)
+}
 });
 
 mc.system.beforeEvents.watchdogTerminate.subscribe(ev => {
