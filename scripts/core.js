@@ -424,8 +424,6 @@ mc.system.runInterval(() => {
     config = get('config')
     return
   };
-  player.op = !world.database_config.realmUse ? player.isOp() : player.hasTag('ess:admin'); //in RealmUse, use tag instead
-  player.id === '-4294967295' ? player.host = true : player.host = false //prevent host deop + tempkick
   if (!world.databasechanged && JSON.stringify(get('config')) != JSON.stringify(world.database_config)) {
     world.sendMessage(`§9Essential §l§7>§r§c ${lang.database.changed}`);
     reload('config', world.database_config);
@@ -444,6 +442,8 @@ mc.system.runInterval(() => {
   };
 
   for (const player of mc.world.getPlayers()) {
+    player.op = !world.database_config.realmUse ? player.isOp() : player.hasTag('ess:admin'); //in RealmUse, use tag instead
+    player.id === '-4294967295' ? player.host = true : player.host = false //prevent host deop + tempkick
     if (world.database_config.modules.permissioncheck.forceop.state && player.op && !world.database_config.modules.permissioncheck.adminList.includes(player.name)) {
       player.setOp(false);
       flag(player, world.database_config.modules.permissioncheck, forceop.punishment)
