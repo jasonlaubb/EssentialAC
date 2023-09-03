@@ -1,10 +1,10 @@
 {
   "format_version": 2,
   "header": {
-    "name": "§9§lEssential Anti Cheat V1.0.0-beta",
+    "name": "§9§lEssential Anti Cheat V1.0.1-beta",
     "description": "§fA basic anti cheat to against hacker\nMade by jasonlaubb and BlueBoot6336421\n§eOpen BetaAPI & hoilday creator",
-    "uuid": "bab73510-ac8e-4aa2-b228-326b6ad8bf7e",
-    "version": [1, 0, 0],
+    "uuid": "b2dae3ec-70a3-4397-859c-657307b758f4",
+    "version": [1, 0, 1],
     "min_engine_version": [1, 20, 0]
   },
   "modules": [
