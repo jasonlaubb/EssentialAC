@@ -15,7 +15,7 @@ var firstLoad = true;
 const world = mc.world;
 
 function errorlogger(e, modules){
-  world.sendMessage(`§9Essential §l§7>§g ERROR! in ${modules}§r §4${e.name}: §c${e.message}`)
+  world.sendMessage(`§9Essential §l§7>§r§g catch §cerror §gin §c${modules}§r§g as §4${e.name}: §c${e.message}`)
 };
 
 if (!state('config')) create('config', trueConfig);
