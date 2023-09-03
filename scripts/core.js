@@ -4,6 +4,7 @@ import * as ui from '@minecraft/server-ui' //import ui
 import trueConfig from './default/config.js'; //get the Default config
 import { create, state, reload, get } from './lib/DataBase.js'; //DataBase modules
 import { langs } from './lib/Language.js'; //language system modules
+import { errorlogger } from './lib/ErrorLogger.js'; //error logger
 
 import en_US from './lang/en_US.js'; //lang files
 import ch_TW from './lang/ch_TW.js';
@@ -13,10 +14,6 @@ import { flag, killDroppedItem, getScores, getGamemode, lagback, compare } from 
 var firstLoad = true;
 
 const world = mc.world;
-
-function errorlogger(e, modules){
-  world.sendMessage(`§9Essential §l§7>§r§g catch §cerror §gin §c${modules}§r§g as §4${e.name}: §c${e.message}`)
-};
 
 if (!state('config')) create('config', trueConfig);
 var config = get('config');
