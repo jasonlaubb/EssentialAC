@@ -8,6 +8,8 @@ It was made by jasonlaubb and get support from hutaotangzhu#0
   <img src="https://img.shields.io/github/last-commit/MeatBallGG/EssentialAC?style=for-the-badge" alt="Last Commit"/>
 </div>
 
+## WARNING: This Anti Cheat is not finished
+
 # Anti Cheat Info
 - Creator: jasonlaubb
 - language: English, Chinese, Japenese
